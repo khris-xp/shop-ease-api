@@ -2,7 +2,6 @@ package middlewares
 
 import (
 	"github.com/khris-xp/shop-ease-api/configs"
-
 	"github.com/labstack/echo/v4"
 )
 

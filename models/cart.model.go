@@ -5,7 +5,7 @@ import (
 )
 
 type Cart struct {
-	ID        string    `json:"id" bson:"_id"`
+	Id        string    `json:"id" bson:"_id,omitempty"`
 	UserId    string    `json:"userId" bson:"userId"`
 	ProductId string    `json:"productId" bson:"productId"`
 	Quantity  int       `json:"quantity" bson:"quantity"`
