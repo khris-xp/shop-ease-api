@@ -121,6 +121,36 @@ func (r *UserRepository) GetUserProfile(ctx context.Context, email string) (mode
 	return user, nil
 }
 
+func (r *UserRepository) GetUserByUsername(ctx context.Context, username string) (models.User, error) {
+	ctx, cancel := context.WithTimeout(ctx, userTimeout)
+	defer cancel()
+
+	var user models.User
+	err := userCollection.FindOne(ctx, bson.M{"username": username}).Decode(&user)
+	if err != nil {
+		return models.User{}, err
+	}
+
+	return user, nil
+}
+
+func (r *UserRepository) GetAllUsers(ctx context.Context) ([]models.User, error) {
+	ctx, cancel := context.WithTimeout(ctx, userTimeout)
+	defer cancel()
+
+	cursor, err := userCollection.Find(ctx, bson.M{})
+	if err != nil {
+		return nil, err
+	}
+
+	var users []models.User
+	if err = cursor.All(ctx, &users); err != nil {
+		return nil, err
+	}
+
+	return users, nil
+}
+
 func (r *UserRepository) RefreshToken(ctx context.Context, token string) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, userTimeout)
 	defer cancel()
