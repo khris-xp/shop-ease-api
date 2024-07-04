@@ -22,6 +22,7 @@ func main() {
 	}))
 
 	routes.AuthRoutes(e)
+	routes.CategoryRoutes(e)
 	port := configs.EnvPort()
 	e.Logger.Fatal(e.Start(":" + port))
 }
