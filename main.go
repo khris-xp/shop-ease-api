@@ -23,6 +23,7 @@ func main() {
 
 	routes.AuthRoutes(e)
 	routes.CategoryRoutes(e)
+	routes.ProductRoutes(e)
 	port := configs.EnvPort()
 	e.Logger.Fatal(e.Start(":" + port))
 }
